@@ -6,12 +6,10 @@ k6_performance_tests: &k6_performance_tests
   run:
     name: Running k6 tests
     # Download the k6 docker image. Alternatively, download the k6 release binary
-    #docker run -i -v $HOME/Perf-Test-DIL:/ci/ loadimpact/k6:latest run /performance-test.js
     # Mount a volume to access the folder and run the test
     command: |
       docker pull loadimpact/k6:latest
-      docker run -i loadimpact/k6:latest run - <performance-test.js
-
+      docker run -v loadimpact/k6:latest run /performance-test.js
 
 version: 2
 jobs:
