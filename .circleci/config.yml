@@ -9,7 +9,7 @@ k6_performance_tests: &k6_performance_tests
     # Mount a volume to access the folder and run the test
     command: |
       docker pull loadimpact/k6:latest
-      docker run -v loadimpact/k6:latest run /performance-test.js
+      docker run -i loadimpact/k6:latest run /performance-test.js
 
 version: 2
 jobs:
