@@ -1,12 +1,21 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
-export let options = { 
-  stages: [
-    { duration: '30s', target: 50 },
-    { duration: '1m30s', target: 50 },
-    { duration: '20s', target: 0 },
-  ],
+export let options = {
+  discardResponseBodies: true,
+  scenarios: {
+    contacts: {
+      executor: 'ramping-vus',
+      startVUs: 0,
+      stages: [
+        { duration: '60s', target: 100 },
+        { duration: '1m', target: 200 },
+        { duration: '60s', target: 100 },
+        { duration: '30s', target: 0 },
+      ],
+      gracefulRampDown: '0s',
+    },
+  },
 };
 
 export default function () {
