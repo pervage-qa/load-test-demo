@@ -3,7 +3,7 @@ orbs:
   k6io: k6io/test@1.1.0
 
 workflows:
-  Load Testing of DIL:
+  Load Testing :
     jobs:
       - k6io/test:
           arguments: --out csv=load_test_result.csv
