@@ -1,28 +1,10 @@
-default: &defaults
-  parallelism: 1
-  working_directory: ~/Perf-Test-DIL
-
-k6_performance_tests: &k6_performance_tests
-  run:
-    name: Running k6 tests
-    # Download the k6 docker image. Alternatively, download the k6 release binary
-    # Mount a volume to access the folder and run the test
-    command: |
-      docker pull loadimpact/k6:latest
-      docker run -i loadimpact/k6:latest run - <performance-test.js
-
-version: 2
-jobs:
-  run_performance_tests:
-    <<: *defaults
-    # Use `machine` executor because the Docker executor cannot mount volumes
-    machine: true
-    steps:
-      - checkout
-      - *k6_performance_tests
+version: 2.1
+orbs:
+  k6io: k6io/test@1.1.0
 
 workflows:
-  version: 2
-  build-and-test:
+  Load Testing :
     jobs:
-      - run_performance_tests
+      - k6io/test:
+          arguments: --out csv=load_test_result.csv
+          script: performance-test.js
