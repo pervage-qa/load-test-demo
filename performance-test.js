@@ -1,17 +1,20 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import { Rate } from 'k6/metrics';
 
-export let options = {
+const failures = new Rate('failed_requests');
+
+export const options = {
   discardResponseBodies: true,
   scenarios: {
     contacts: {
       executor: 'ramping-vus',
       startVUs: 0,
       stages: [
-        { duration: '60s', target: 100 },
-        { duration: '1m', target: 200 },
-        { duration: '60s', target: 100 },
-        { duration: '30s', target: 0 },
+        { duration: '5s', target: 10 },
+        { duration: '10s', target: 20 },
+        { duration: '10s', target: 10 },
+        { duration: '5s', target: 0 },
       ],
       gracefulRampDown: '0s',
     },
@@ -29,8 +32,8 @@ export default function () {
     },
   };
 
-  let res = http.get(url,params);
-
-  check(res, { 'status was 200': (r) => r.status == 200 });
-  sleep(1);
+  const result = http.get(url,params);
+  check(result, { 'status was 200': (r) => r.status == 200 });
+  failures.add(result.status !== 200);
+  sleep(3);
 }
