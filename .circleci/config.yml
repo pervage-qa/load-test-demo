@@ -25,6 +25,7 @@ start_container_run_load: &start_container_run_load
       name: Start container and Run Load Testing
       command: |
         set -x
+        cd /home/circleci/Perf-Test-DIL | ls -l
         docker-compose up -d
         docker-compose run -v $HOME/performance-test.js:/scripts k6 run /scripts/performance-test.js
 version: 2
