@@ -18,9 +18,8 @@ install_docker_compose: &install_docker_compose
       name: Install Docker Compose
       command: |
         set -x
-        mkdir -p /home/circleci/Perf-Test-DIL/bin/docker-compose/
-        curl -L https://github.com/docker/compose/releases/download/1.29.1/docker-compose-Linux-x86_64 > /home/circleci/Perf-Test-DIL/bin/docker-compose/
-        chmod +x /home/circleci/Perf-Test-DIL/bin/docker-compose/
+        curl -L https://github.com/docker/compose/releases/download/1.29.1/docker-compose-Linux-x86_64 > /home/circleci/Perf-Test-DIL/bin/docker-compose
+        chmod +x /home/circleci/Perf-Test-DIL/bin/docker-compose
 start_container_run_load: &start_container_run_load
     run:
       name: Start container and Run Load Testing
