@@ -9,7 +9,7 @@ install_docker_client: &install_docker_client
         set -x
         VER="20.10.6"
         curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/staticstable/x86_64/docker-$VER.tgz
-        tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+        tar zxvf /tmp/docker-$VER.tgz -C /tmp
         mv /tmp/docker/* /usr/bin
 install_docker_compose: &install_docker_compose
     run:
@@ -24,10 +24,7 @@ start_container_run_load: &start_container_run_load
       command: |
         set -x
         docker-compose up -d
-        # docker-compose will start 2 containers, the one with service will be named `contacts`
-        # we start another container with curl in the same network as `contacts`, this way we have
-        # all exposed ports from `contacts` available on `localhost` in this new container
-        docker-compose run -v $PWD/performance-test.js:/scripts k6 run /scripts/performance-test.js
+        docker-compose run -v $HOME/performance-test.js:/scripts k6 run /scripts/performance-test.js
 version: 2
 jobs:
   run_performance_tests:
