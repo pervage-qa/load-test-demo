@@ -11,14 +11,14 @@ install_docker_client: &install_docker_client
         VER="20.10.6"
         curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
         tar zxvf /tmp/docker-$VER.tgz -C /tmp
-        mv /tmp/docker/* /usr/bin
+        mv /tmp/docker/* /home/circleci/Perf-Test-DIL/bin/docker/
 install_docker_compose: &install_docker_compose
     run:
       name: Install Docker Compose
       command: |
         set -x
         curl -L https://github.com/docker/compose/releases/download/1.29.1/docker-compose-Linux-x86_64 > /usr/local/bin/docker-compose
-        chmod +x /usr/local/bin/docker-compose
+        chmod +x /home/circleci/Perf-Test-DIL/bin/docker-compose/
 start_container_run_load: &start_container_run_load
     run:
       name: Start container and Run Load Testing
