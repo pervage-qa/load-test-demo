@@ -36,9 +36,9 @@ jobs:
     machine: true
     steps:
       - checkout
-      - install_docker_client
-      - install_docker_compose
-      - start_container_run_load
+      - *install_docker_client
+      - *install_docker_compose
+      - *start_container_run_load
 workflows:
   version: 2
   build-and-test:
