@@ -8,7 +8,7 @@ install_docker_client: &install_docker_client
       command: |
         set -x
         VER="20.10.6"
-        curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/staticstable/x86_64/docker-$VER.tgz
+        curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
         tar zxvf /tmp/docker-$VER.tgz -C /tmp
         mv /tmp/docker/* /usr/bin
 install_docker_compose: &install_docker_compose
