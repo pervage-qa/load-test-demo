@@ -40,4 +40,4 @@ services:
     ports:
       - "6565:6565"
     environment:
-      - K6_OUT=influxdb=http://admin:supersecretpassword@172.19.0.1:8086/influxdb/k6
+      - K6_OUT=influxdb=http://admin:supersecretpassword@172.19.0.1:8086/k6
