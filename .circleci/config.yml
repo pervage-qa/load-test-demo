@@ -32,7 +32,7 @@ start_container_run_load: &start_container_run_load
         docker volume create grafana-volume
         docker volume create influxdb-volume
         docker volume ls
-        docker run --rm \
+        docker run -d --rm \
         -e INFLUXDB_DB=k6 -e INFLUXDB_ADMIN_ENABLED=true \
         -e INFLUXDB_ADMIN_USER=admin \
         -e INFLUXDB_ADMIN_PASSWORD=supersecretpassword \
