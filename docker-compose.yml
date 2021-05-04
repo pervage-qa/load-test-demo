@@ -14,8 +14,8 @@ services:
       - grafana
     ports:
       - "8086:8086"
-    environment:
-      - INFLUXDB_DB=k6
+    volumes:
+      - influxdb-volume:/var/lib/influxdb
 
   grafana:
     image: grafana/grafana:latest
@@ -25,10 +25,8 @@ services:
       - grafana
     ports:
       - "3000:3000"
-    environment:
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_BASIC_ENABLED=false
+    volumes:
+      - grafana-volume:/var/lib/grafana
 
   k6:
     image: loadimpact/k6:latest
