@@ -37,8 +37,7 @@ start_container_run_load: &start_container_run_load
         -e INFLUXDB_ADMIN_USER=admin \
         -e INFLUXDB_ADMIN_PASSWORD=supersecretpassword \
         -e INFLUXDB_USER=telegraf -e INFLUXDB_USER_PASSWORD=secretpassword \
-        -v influxdb-volume:/var/lib/influxdb \
-        influxdb /init-influxdb.sh
+        -v influxdb-volume:/var/lib/influxdb influxdb
         docker-compose up -d
         docker ps
         docker-compose run -v /home/circleci/Perf-Test-DIL/:/scripts k6 run //scripts//performance-test.js
