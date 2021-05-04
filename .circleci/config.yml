@@ -26,7 +26,21 @@ start_container_run_load: &start_container_run_load
       command: |
         set -x
         cd /home/circleci/Perf-Test-DIL | ls -l
-        docker-compose up -d influxdb grafana
+        docker network create k6
+        docker network create grafana
+        docker network ls
+        docker volume create grafana-volume
+        docker volume create influxdb-volume
+        docker volume ls
+        docker run --rm \
+        -e INFLUXDB_DB=k6 -e INFLUXDB_ADMIN_ENABLED=true \
+        -e INFLUXDB_ADMIN_USER=admin \
+        -e INFLUXDB_ADMIN_PASSWORD=supersecretpassword \
+        -e INFLUXDB_USER=telegraf -e INFLUXDB_USER_PASSWORD=secretpassword \
+        -v influxdb-volume:/var/lib/influxdb \
+        influxdb /init-influxdb.sh
+        docker-compose up -d
+        docker ps
         docker-compose run -v /home/circleci/Perf-Test-DIL/:/scripts k6 run //scripts//performance-test.js
         ifconfig
 version: 2
