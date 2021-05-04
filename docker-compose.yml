@@ -16,6 +16,13 @@ services:
       - "8086:8086"
     volumes:
       - influxdb-volume:/var/lib/influxdb
+    environment: 
+      - INFLUXDB_DB=k6
+      - INFLUXDB_ADMIN_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=supersecretpassword
+      - INFLUXDB_USER=k6
+      - INFLUXDB_USER_PASSWORD=secretpassword
 
   grafana:
     image: grafana/grafana:latest
