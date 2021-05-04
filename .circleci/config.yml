@@ -29,9 +29,6 @@ start_container_run_load: &start_container_run_load
         docker network create k6
         docker network create grafana
         docker network ls
-        docker volume create grafana-volume
-        docker volume create influxdb-volume
-        docker volume ls
         docker-compose up -d
         docker ps
         docker-compose run -v /home/circleci/Perf-Test-DIL/:/scripts k6 run //scripts//performance-test.js
