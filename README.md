@@ -1,1 +1,1 @@
-# Performance Testing using k6 and Locust
+# Load Testing using k6 and Locust
