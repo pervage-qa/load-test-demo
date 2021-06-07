@@ -1,10 +1,19 @@
-from locust import HttpUser, TaskSet, task, constant, LoadTestShape
+from locust import HttpUser, TaskSet, task, constant, LoadTestShape, SequentialTaskSet
 
-class DemoTaskSet(TaskSet):
+class DemoTaskSet(SequentialTaskSet):
 
     @task
-    def demo_test(self):
-        self.client.get("/")
+    def demo_get_test(self):
+        self.client.get("/api/users?page=2")
+
+    @task
+    def demo_post_test(self):
+        post_url = "/api/users"
+        request_body = {
+                "name": "morpheus",
+                "job": "leader"
+                }
+        self.client.post(post_url,request_body)
 
 
 class DemoHttpUser(HttpUser):
