@@ -1,6 +1,7 @@
 from locust import HttpUser, TaskSet, task, constant, LoadTestShape
 import math
 
+
 class DemoTaskSet(TaskSet):
 
     @task
@@ -15,7 +16,7 @@ class DemoHttpUser(HttpUser):
 
 class DoubleWave(LoadTestShape):
     """
-    A shape to immitate some specific user behaviour. In this example, midday
+    A shape to imitate some specific user behaviour. In this example, midday
     and evening meal times. First peak of users appear at time_limit/3 and
     second peak appears at 2*time_limit/3
     Settings:
@@ -35,12 +36,12 @@ class DoubleWave(LoadTestShape):
 
         if run_time < self.time_limit:
             user_count = (
-                (self.peak_one_users - self.min_users)
-                * math.e ** -(((run_time / (self.time_limit / 10 * 2 / 3)) - 5) ** 2)
-                + (self.peak_two_users - self.min_users)
-                * math.e ** -(((run_time / (self.time_limit / 10 * 2 / 3)) - 10) ** 2)
-                + self.min_users
+                    (self.peak_one_users - self.min_users)
+                    * math.e ** -(((run_time / (self.time_limit / 10 * 2 / 3)) - 5) ** 2)
+                    + (self.peak_two_users - self.min_users)
+                    * math.e ** -(((run_time / (self.time_limit / 10 * 2 / 3)) - 10) ** 2)
+                    + self.min_users
             )
-            return (round(user_count), round(user_count))
+            return round(user_count), round(user_count)
         else:
             return None

@@ -1,45 +1,46 @@
-from locust import HttpUser, TaskSet, task, constant, LoadTestShape, SequentialTaskSet
+from locust import HttpUser, task, constant, LoadTestShape, SequentialTaskSet
+
 
 class UserJourney(SequentialTaskSet):
 
     @task
     def demo_get_test(self):
         print("Get Users")
-        self.client.get("/api/users?page=2",name='Users List')
+        self.client.get("/api/users?page=2", name='Users List')
 
     @task
     def demo_post_test(self):
         print("Create User")
         post_url = "/api/users"
-        
+
         request_body = {
-                "name": "morpheus",
-                "job": "leader"
-                }
-        self.client.post(post_url,request_body,name='Create User')
-        
-    
+            "name": "morpheus",
+            "job": "leader"
+        }
+        self.client.post(post_url, request_body, name='Create User')
+
     @task
     def demo_put_test(self):
         print("Update Users")
         post_url = "/api/users/2"
-        
+
         request_body = {
-                    "name": "morpheus",
-                    "job": "Zion Resident"
-                }
-        self.client.put(post_url,request_body,name='Update User')
+            "name": "morpheus",
+            "job": "Zion Resident"
+        }
+        self.client.put(post_url, request_body, name='Update User')
 
     @task
     def demo_login_test(self):
         print("User Login")
         post_url = "/api/login"
-        
+
         request_body = {
-                        "email": "eve.holt@reqres.in",
-                        "password": "cityslicka"
-                    }
-        self.client.post(post_url,request_body,name='Login Token')
+            "email": "eve.holt@reqres.in",
+            "password": "cityslicka"
+        }
+        self.client.post(post_url, request_body, name='Login Token')
+
 
 class DemoHttpUser(HttpUser):
     tasks = [UserJourney]
@@ -48,7 +49,7 @@ class DemoHttpUser(HttpUser):
 
 class StagesShape(LoadTestShape):
     """
-    A simply load test shape class that has different user and spawn_rate at
+    A simple load test shape class that has different user and spawn_rate at
     different stages.
     Keyword arguments:
         stages -- A list of dicts, each representing a stage with the following keys:
