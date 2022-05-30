@@ -1,4 +1,4 @@
-from locust import HttpUser, TaskSet, task, constant, LoadTestShape, SequentialTaskSet
+from locust import HttpUser, task, constant, LoadTestShape, SequentialTaskSet
 
 
 class UserJourney(SequentialTaskSet):
