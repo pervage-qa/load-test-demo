@@ -1,5 +1,6 @@
 from locust import HttpUser, TaskSet, task, constant, LoadTestShape
 
+
 class DemoTaskSet(TaskSet):
 
     @task
@@ -14,7 +15,7 @@ class DemoHttpUser(HttpUser):
 
 class StagesShape(LoadTestShape):
     """
-    A simply load test shape class that has different user and spawn_rate at
+    A simple load test shape class that has different user and spawn_rate at
     different stages.
     Keyword arguments:
         stages -- A list of dicts, each representing a stage with the following keys:
